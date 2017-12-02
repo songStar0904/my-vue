@@ -1,0 +1,145 @@
+/*
+* @Author: Administrator
+* @Date:   2017-06-28 19:31:50
+* @Last Modified by:   Administrator
+* @Last Modified time: 2017-07-02 13:17:32
+*/
+html {
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+}
+
+html, body {
+  height: 100%;
+  background-color: #eff0f4;
+}
+
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}
+
+.align_center {
+  text-align: center;
+}
+
+.align_left {
+  text-align: left;
+}
+
+.align_right {
+  text-align: right;
+}
+
+.ofh {
+  overflow: hidden;
+}
+
+.hide {
+  display: none;
+}
+
+.block {
+  display: block;
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.m_auto {
+  margin: auto;
+}
+
+.width_100 {
+  width: 100%;
+}
+
+.height_100 {
+  height: 100%;
+}
+
+.nowrap {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.d_box {
+  display: flex;
+  box-sizing: border-box;
+  flex: 1;
+  width: 100%;
+}
+
+.d_boxflex {
+  flex: 1;
+  display: block;
+}
+
+//element ui bg-color
+.grid-content {
+    border-radius: 4px;
+    min-height: 50px;
+    color: #fff;
+    font-size: 20px;
+    text-align:center;
+    padding: 20px;
+}
+.bg-light-blue{
+  background-color:#58B7FF;
+}
+.bg-blue{
+  background-color:#20A0FF;
+}
+.bg-dark-blue{
+  background-color:#1D8CE0;
+}
+.bg-success{
+  background-color:#13CE66;
+}
+.bg-warning{
+  background-color:#F7BA2A;
+}
+.bg-danger{
+  background-color: #FF4949;
+}
+.bg-gray{
+  background-color: #D3DCE6;
+}
+.bg-light-black{
+  background-color:#324057;
+}
+.text-light-blue{
+  color:#58B7FF;
+}
+.text-blue{
+  color:#20A0FF;
+}
+.text-dark-blue{
+  color:#1D8CE0;
+}
+.text-success{
+  color:#13CE66;
+}
+.text-warning{
+  color:#F7BA2A;
+}
+.text-danger{
+  color: #FF4949;
+}
+.text-gray{
+  color: #D3DCE6;
+}
+.text-light-black{
+  color:#324057;
+}
+.text-orange{
+  color:#f60;
+}
