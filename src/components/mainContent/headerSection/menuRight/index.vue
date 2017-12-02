@@ -1,8 +1,9 @@
 <template>
-<div>
+<section>
 <div class="menu-left">
+  <i class="el-icon-close" @click="changeCollapse" :class="{collapse: isCollapse}"></i>
 </div>
-  <div class="menu-right">
+  <div class="menu-right" :class="{collapse: isCollapse}">
     <div class="notification-menu">
       <el-dropdown trigger="click" class="notification-list">
         <div class="notification-btn">
@@ -39,9 +40,10 @@
       </el-dropdown>
     </div>
   </div>
-  </div>
+</section>
 </template>
 <script type="text/javascript">
+  import { mapMutations, mapGetters } from 'vuex'
   export default{
     data () {
       return {
@@ -51,6 +53,11 @@
     mounted () {
       this.$store.dispatch('GET_USER').then((res) => {
         this.userInfo = res
+      })
+    },
+    computed: {
+      ...mapGetters({
+        isCollapse: 'GET_COLLAPSE'
       })
     },
     methods: {
@@ -80,7 +87,10 @@
         this.$router.push({name: 'admin'})
       },
       user_setting () {
-      }
+      },
+      ...mapMutations({
+        changeCollapse: 'SET_COLLAPSE'
+      })
     }
   }
 </script>

@@ -1,54 +1,58 @@
 <template>
-  <div class="left-side">
+  <div class="left-side" :style="{overflowY:isCollapse ? 'visible' : 'auto'}">
     <div class="left-side-inner">
       <router-link to="/" class="logo block">
-        <h1 class="title">{{title}}</h1>
+        <h1 class="title" v-show="!isCollapse">{{title}}</h1>
       </router-link>
-      <el-menu
-        class="menu-box"
-        theme="dark"
+      
+      <el-menu 
+        class="el-menu-vertical-demo"
         router
         :default-active="$route.path"
-        :collapse="isCollapse">
-        <div
+        :collapse="isCollapse"
+        text-color="#fff"
+        active-text-color="#65cea7"
+        background-color="#424f63">
+        <el-submenu 
           v-for="(item, index) in nav_menu_data"
-          :key="index">
-          <el-menu-item
-            class="menu-list"
-            v-if="typeof item.child === 'undefined'"
-            :index="item.path">
+          :key="index"
+          :index="item.path"
+          class="menu-list"
+          v-if="typeof item.child !== 'undefined'"
+          >
+          <template slot="title">
             <i class="icon fa" :class="item.icon"></i>
-            <span v-text="item.title" class="text"></span>
-          </el-menu-item>
-          <el-submenu
-            :index="item.path"
-            v-else>
-            <template slot="title">
-              <i class="icon fa" :class="item.icon"></i>
-              <span v-text="item.title" class="text"></span>
-            </template>
-            <el-menu-item
+            <span slot="title" v-text="item.title" class="text"></span>
+          </template>
+          <el-menu-item-group>
+            <!-- <span slot="title">分组一</span> -->
+            <el-menu-item 
               class="menu-list"
               v-for="(sub_item, sub_index) in item.child"
               :index="sub_item.path"
-              :key="sub_index">
-              <!--<i class="icon fa" :class="sub_item.icon"></i>-->
-              <span v-text="sub_item.title" class="text"></span>
-            </el-menu-item>
-          </el-submenu>
-        </div>
+              :key="sub_index"
+              v-text="sub_item.title"></el-menu-item>
+          </el-menu-item-group>
+        </el-submenu>
+        <el-menu-item :index="item.path" v-else>
+          <i class="icon fa" :class="item.icon"></i>
+          <span slot="title" v-text="item.title" class="text"></span>
+        </el-menu-item>
       </el-menu>
     </div>
   </div>
 </template>
 <script type="text/javascript">
+  import { mapGetters } from 'vuex'
   export default{
     name: 'slide',
-    methods: {
+    computed: {
+      ...mapGetters({
+        isCollapse: 'GET_COLLAPSE'
+      })
     },
     data () {
       return {
-        isCollapse: true,
         title: 'songstar',
         nav_menu_data: [{
           title: '主页',

@@ -53,8 +53,8 @@
            <template scope="props">
            <el-switch
             v-model="props.row.status"
-            :on-value="1"
-            :off-value="0"
+            :active-value="1"
+            :inactive-value="0"
             on-color="#13ce66"
             off-color="#ff4949"
             @change="changeStatus(props.row)">

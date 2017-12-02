@@ -5,7 +5,7 @@ import router from './router'
 import App from './App'
 // element-ui
 import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-default/index.css'
+import 'element-ui/lib/theme-chalk/index.css'
 Vue.use(ElementUI)
 // 导入样式
 import 'normalize.css'

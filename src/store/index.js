@@ -11,10 +11,12 @@ Vue.use(Vuex)
 
 import userInfo from './userInfo/userInfo'
 import type from './type/type'
+import collapse from './collapse/collapse'
 
 export default new Vuex.Store({
   modules: {
     userInfo,
-    type
+    type,
+    collapse
   }
 })

@@ -7,30 +7,33 @@
 .body-warp {
   animation: fadeIn .5s ease;
 }
-
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+  width: 200px;
+  min-height: 400px;
+}
+.el-menu-vertical-demo{
+  border-right: none;
+  }
 .left-side {
   position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
-  width: 220px;
   height: 100%;
-  overflow-y: auto;
   background-color: #424f63;
+  z-index: 1001;
   .logo {
     margin: 10px auto;
     text-align: center;
+    height: 36px;
     .title{
     	color: #fff;
     }
   }
   .menu-box {
-    background-color: #424f63;
     .menu-list, .el-submenu__title {
       height: 45px;
       line-height: 45px;
-      color: #fff;
-      background-color: #424f63;
       .icon {
         width: 16px;
         font-size: 14px;
@@ -45,11 +48,14 @@
     }
   }
 }
-
+.main-content.collapse{
+  margin-left: 200px;
+}
 .main-content {
   position: relative;
-  margin-left: 220px;
   padding-top: 50px;
+  margin-left: 64px;
+  transition: all 0.6s ease;
   .header-section {
     position: fixed;
     top: 0;
@@ -66,7 +72,23 @@
       font-size: 14px;
     }
     .menu-left {
-    float:left;
+      float:left;
+      i{
+        font-size: 30px;
+        line-height: 50px;
+        margin-left: 10px;
+        cursor: pointer;
+        transition: all ease 0.6s;
+      }
+      i:hover{
+        color: rgb(101, 206, 167);
+      }
+      i.collapse{
+        transform: rotate(45deg);
+      }
+    }
+    .menu-right.collapse{
+      margin-right: 99px;
     }
     .menu-right {
       position: relative;
@@ -75,6 +97,7 @@
       text-align: right;
       font-size: 0;
       z-index: 999;
+      transition: all 0.6s ease;
       .notification-list {
         position: relative;
         display: inline-block;
