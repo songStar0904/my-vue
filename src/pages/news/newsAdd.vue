@@ -26,19 +26,19 @@
             <el-form-item label="是否发布:">
               <el-switch
                 v-model="form.status"
-                on-color="#13ce66"
-                off-color="#ff4949"
-                :on-value="1"
-                :off-value="0">
+                active-color="#13ce66"
+                inactive-color="#ff4949"
+                :active-value="1"
+                :inactive-value="0">
               </el-switch>
             </el-form-item>
              <el-form-item label="是否置顶:">
               <el-switch
                 v-model="form.stick"
-                on-color="#13ce66"
-                off-color="#ff4949"
-                :on-value="1"
-                :off-value="0">
+                active-color="#13ce66"
+                inactive-color="#ff4949"
+                :active-value="1"
+                :inactive-value="0">
               </el-switch>
             </el-form-item>
             <el-form-item label="新闻图片:">

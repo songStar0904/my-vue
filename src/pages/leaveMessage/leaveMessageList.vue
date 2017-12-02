@@ -55,7 +55,7 @@
           label="操作"
           width="180">
           <template scope="props">
-              <el-button type="info" size="small" icon="edit">回复</el-button>
+              <el-button type="primary" size="small" icon="edit">回复</el-button>
             <el-button type="danger" size="small" icon="delete" @click="delete_data(props.row)">删除</el-button>
           </template>
         </el-table-column>

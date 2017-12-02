@@ -19,7 +19,7 @@
   	<div style="padding: 14px;">
        <div class="name">{{item.name}}</div>
        <el-row type="flex" class="row-bg" justify="space-around">
-  <el-col :span="12"><router-link :to="{name: 'styleGoods', params: {item: item, gid: gid, sid: item.sid}}" tag="span"><el-button type="info" size="small" icon="edit"></el-button></router-link></el-col>
+  <el-col :span="12"><router-link :to="{name: 'styleGoods', params: {item: item, gid: gid, sid: item.sid}}" tag="span"><el-button type="primary" size="small" icon="edit"></el-button></router-link></el-col>
   <el-col :span="12"><el-button type="danger" size="small" icon="delete" @click="delete_data(item)"></el-button></el-col>
    </el-row>
       </div>

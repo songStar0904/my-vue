@@ -49,7 +49,7 @@
           width="170">
           <template scope="props">
             <router-link :to="{name: 'photoEdit', params: {id: props.row.id}}" tag="span">
-              <el-button type="info" size="small" icon="edit">修改</el-button>
+              <el-button type="primary" size="small" icon="edit">修改</el-button>
             </router-link>
             <el-button type="danger" size="small" icon="delete" @click="delete_data(props.row)">删除</el-button>
           </template>

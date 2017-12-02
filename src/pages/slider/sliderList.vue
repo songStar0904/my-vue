@@ -55,8 +55,8 @@
             v-model="props.row.status"
             :active-value="1"
             :inactive-value="0"
-            on-color="#13ce66"
-            off-color="#ff4949"
+            active-color="#13ce66"
+            inactive-color="#ff4949"
             @change="changeStatus(props.row)">
           </el-switch>
           </template>
@@ -66,7 +66,7 @@
           width="170">
           <template scope="props">
             <router-link :to="{name: 'sliderEdit', params: {id: props.row.id}}" tag="span">
-              <el-button type="info" size="small" icon="edit">修改</el-button>
+              <el-button type="primary" size="small" icon="edit">修改</el-button>
             </router-link>
             <el-button type="danger" size="small" icon="delete" @click="delete_data(props.row)">删除</el-button>
           </template>

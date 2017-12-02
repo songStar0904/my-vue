@@ -38,7 +38,7 @@
         <el-table-column
           label="操作">
           <template scope="props">
-              <el-button type="info" size="small" icon="edit" @click="openDialog(props.row)">修改</el-button>
+              <el-button type="primary" size="small" icon="edit" @click="openDialog(props.row)">修改</el-button>
             <el-button type="danger" size="small" icon="delete" @click="delete_data(props.row)">删除</el-button>
           </template>
         </el-table-column>
