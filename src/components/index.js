@@ -5,6 +5,7 @@ import bottomToolBar from './bottomToolBar'
 import panelTitle from './panelTitle/index.vue'
 import vEditor from './editor/editor'
 import search from './search'
+import myTable from './table/table'
 export {
   leftMenu,
   mainContent,
@@ -12,5 +13,6 @@ export {
   bottomToolBar,
   panelTitle,
   vEditor,
-  search
+  search,
+  myTable
 }

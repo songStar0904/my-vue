@@ -20,7 +20,7 @@
     </el-carousel>
   	<div style="padding: 14px;">
        <div class="name" style="marginBottom:10px;">{{item.name}}</div>
-       <el-row v-for="(stock, size) in item.size" style="height:50px;">
+       <el-row v-for="(stock, size) in item.size" :key="stock" style="height:50px;">
        <el-col :span="5" style="lineHeight:40px;">{{size}}</el-col>
        <el-col :span="19" style="textAlign: right;">
         <el-input-number v-model="item.size[size]"  size="small" :min="1" :max="99999" label="描述文字"></el-input-number>
