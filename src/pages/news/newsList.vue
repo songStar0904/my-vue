@@ -9,69 +9,48 @@
       </router-link>
     </panel-title>
     <div class="panel-body">
-      <el-table
+      <my-table
         :data="news"
-        v-loading="load_data"
-        element-loading-text="拼命加载中"
-        border
-        @selection-change="on_batch_select"
+        :col-configs="colConfigs"
+        :loading="load_data"
+        @selectionChange="on_batch_select"
         style="width: 100%;">
         <el-table-column
           type="selection"
-          width="55">
-        </el-table-column>
-        <el-table-column
-          prop="id"
-          label="id"
-          width="80"
-          sortable>
-        </el-table-column>
-        <el-table-column
-          prop="title"
-          label="新闻标题"
-          width="120"
-          sortable>
+          width="55"
+          slot="selection">
         </el-table-column>
         <el-table-column
           label="作者"
           width="120"
-          sortable>
+          sortable
+          slot="author">
           <template scope="props">
         <span>{{ props.row.author.nick }}</span>
           </template>
         </el-table-column>
         <el-table-column
           label="标题图片"
-          width="100">
+          width="100"
+          slot="img">
            <template scope="props">
            <img :src="props.row.img" alt="" />
           </template>
         </el-table-column>
-        <el-table-column
-          prop="view"
-          label="浏览"
-          width="90"
-          sortable>
-        </el-table-column>
-        <el-table-column
-          prop="love"
-          label="点赞"
-          width="90"
-          sortable>
-        </el-table-column>
-        <el-table-column
+        <!-- <el-table-column
           label="评论"
           width="90"
           sortable>
            <template scope="props">
         <span>{{ props.row.comment }}</span>
           </template>
-        </el-table-column>
+        </el-table-column> -->
         <el-table-column
           label="创建时间"
           width="150"
           prop="date"
-          sortable>
+          sortable
+          slot="date">
            <template scope="props">
         <el-icon name="time"></el-icon>
         <span style="margin-left: 10px">{{ props.row.date }}</span>
@@ -79,7 +58,8 @@
         </el-table-column>
         <el-table-column
           label="是否发布"
-          width="100">
+          width="100"
+          slot="status">
            <template scope="props">
            <el-switch
             v-model="props.row.status"
@@ -93,7 +73,8 @@
         </el-table-column>
         <el-table-column
           label="是否置顶"
-          width="100">
+          width="100"
+          slot="stick">
            <template scope="props">
            <el-switch
             v-model="props.row.stick"
@@ -107,7 +88,8 @@
         </el-table-column>
         <el-table-column
           label="操作"
-          width="170">
+          width="170"
+          slot="opt">
           <template scope="props">
             <router-link :to="{name: 'newsEdit', params: {id: props.row.id}}" tag="span">
               <el-button type="primary" size="small" icon="edit">修改</el-button>
@@ -115,7 +97,7 @@
             <el-button type="danger" size="small" icon="delete" @click="delete_data(props.row)">删除</el-button>
           </template>
         </el-table-column>
-      </el-table>
+      </my-table>
       <bottom-tool-bar>
         <el-button
           type="danger"
@@ -142,11 +124,41 @@
   </div>
 </template>
 <script type="text/javascript">
-  import {panelTitle, bottomToolBar} from '@/components'
+  import {panelTitle, bottomToolBar, myTable} from '@/components'
 
   export default{
     data () {
       return {
+        colConfigs: [{
+          slot: 'selection'
+        }, {
+          prop: 'id',
+          label: 'id'
+        }, {
+          prop: 'title',
+          label: '新闻标题'
+        }, {
+          slot: 'author'
+        }, {
+          slot: 'img'
+        }, {
+          prop: 'view',
+          label: '浏览'
+        }, {
+          prop: 'love',
+          label: '点赞'
+        }, {
+          prop: 'comment',
+          label: '评论'
+        }, {
+          slot: 'date'
+        }, {
+          slot: 'status'
+        }, {
+          slot: 'stick'
+        }, {
+          slot: 'opt'
+        }],
         news: null,
         // 当前页码
         currentPage: 1,
@@ -164,7 +176,8 @@
     },
     components: {
       panelTitle,
-      bottomToolBar
+      bottomToolBar,
+      myTable
     },
     mounted () {
       this.get_table_data()

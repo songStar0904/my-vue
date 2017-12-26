@@ -6,16 +6,16 @@
       </el-button>
     </panel-title>
     <div class="panel-body">
-      <el-table
+      <my-table
         :data="leaveMsg"
-        v-loading="load_data"
-        element-loading-text="拼命加载中"
-        border
-        @selection-change="on_batch_select"
+        :col-configs="colConfigs"
+        :loading="load_data"
+        @selectionChange="on_batch_select"
         style="width: 100%;">
         <el-table-column
           type="selection"
-          width="55">
+          width="55"
+          slot="selection">
         </el-table-column>
         <el-table-column
           prop="id"
@@ -41,7 +41,8 @@
           label="留言时间"
           width="150"
           prop="date"
-          sortable>
+          sortable
+          slot="date">
            <template scope="props">
         <el-icon name="time"></el-icon>
         <span style="margin-left: 10px">{{ props.row.date }}</span>
@@ -53,13 +54,14 @@
         </el-table-column>
         <el-table-column
           label="操作"
-          width="180">
+          width="180"
+          slot="opt">
           <template scope="props">
               <el-button type="primary" size="small" icon="edit">回复</el-button>
             <el-button type="danger" size="small" icon="delete" @click="delete_data(props.row)">删除</el-button>
           </template>
         </el-table-column>
-      </el-table>
+      </my-table>
       <bottom-tool-bar>
         <el-button
           type="danger"
@@ -86,11 +88,31 @@
   </div>
 </template>
 <script type="text/javascript">
-  import {panelTitle, bottomToolBar} from '@/components'
+  import {panelTitle, bottomToolBar, myTable} from '@/components'
 
   export default{
     data () {
       return {
+        colConfigs: [{
+          slot: 'selection'
+        }, {
+          prop: 'id',
+          label: 'id'
+        }, {
+          prop: 'name',
+          label: '留言人'
+        }, {
+          prop: 'phone',
+          label: '留言人电话'
+        }, {
+          prop: 'email',
+          label: '留言人邮箱'
+        }, {
+          prop: 'content',
+          label: '留言内容'
+        }, {
+          slot: 'opt'
+        }],
         leaveMsg: null,
         // 当前页码
         currentPage: 1,
@@ -108,7 +130,8 @@
     },
     components: {
       panelTitle,
-      bottomToolBar
+      bottomToolBar,
+      myTable
     },
     created () {
       this.get_table_data()

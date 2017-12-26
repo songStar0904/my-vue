@@ -9,47 +9,34 @@
       </router-link>
     </panel-title>
     <div class="panel-body">
-      <el-table
+      <my-table
         :data="slider"
-        v-loading="load_data"
-        element-loading-text="拼命加载中"
-        border
-        @selection-change="on_batch_select"
+        :col-configs="colConfigs"
+        :loading="load_data"
+        @selectionChange="on_batch_select"
         style="width: 100%;">
         <el-table-column
           type="selection"
-          width="55">
+          width="55"
+          slot="selection">
         </el-table-column>
         <el-table-column
-          prop="id"
-          label="id"
-          width="80"
-          sortable>
-        </el-table-column>
-        <el-table-column
-          prop="title"
-          label="主标题"
-          sortable>
-        </el-table-column>
-        <el-table-column
-          prop="subtitle"
-          label="副标题"
-          sortable>
-        </el-table-column>
-        <el-table-column
-          label="轮播图片">
+          label="轮播图片"
+          slot="img">
            <template scope="props">
            <img :src="props.row.img" alt="" />
           </template>
         </el-table-column>
         <el-table-column
-          label="链接">
+          label="链接"
+          slot="link">
            <template scope="props">
            <a :href="props.row.link">点击浏览(可为空)</a>
           </template>
         </el-table-column>
         <el-table-column
-          label="是否发布">
+          label="是否发布"
+          slot="status">
            <template scope="props">
            <el-switch
             v-model="props.row.status"
@@ -63,7 +50,8 @@
         </el-table-column>
         <el-table-column
           label="操作"
-          width="170">
+          width="170"
+          slot="opt">
           <template scope="props">
             <router-link :to="{name: 'sliderEdit', params: {id: props.row.id}}" tag="span">
               <el-button type="primary" size="small" icon="edit">修改</el-button>
@@ -71,7 +59,7 @@
             <el-button type="danger" size="small" icon="delete" @click="delete_data(props.row)">删除</el-button>
           </template>
         </el-table-column>
-      </el-table>
+      </my-table>
       <bottom-tool-bar>
         <el-button
           type="danger"
@@ -98,11 +86,30 @@
   </div>
 </template>
 <script type="text/javascript">
-  import {panelTitle, bottomToolBar} from '@/components'
-
+  import {panelTitle, bottomToolBar, myTable} from '@/components'
   export default{
     data () {
       return {
+        colConfigs: [{
+          slot: 'selection'
+        }, {
+          prop: 'id',
+          label: 'id'
+        }, {
+          prop: 'title',
+          label: '主标题'
+        }, {
+          prop: 'subtitle',
+          label: '副标题'
+        }, {
+          slot: 'img'
+        }, {
+          slot: 'link'
+        }, {
+          slot: 'status'
+        }, {
+          slot: 'opt'
+        }],
         slider: null,
         // 当前页码
         currentPage: 1,
@@ -120,7 +127,8 @@
     },
     components: {
       panelTitle,
-      bottomToolBar
+      bottomToolBar,
+      myTable
     },
     created () {
       this.get_table_data()

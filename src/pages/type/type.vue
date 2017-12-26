@@ -7,36 +7,26 @@
         <el-button type="primary" icon="plus" size="small" @click="openType()">添加数据</el-button>
     </panel-title>
     <div class="panel-body">
-      <el-table
+      <my-table
         :data="type"
-        v-loading="load_data"
-        element-loading-text="拼命加载中"
-        border
-        stripe
-        @selection-change="on_batch_select"
+        :col-configs="colConfigs"
+        :loading="load_data"
+        @selectionChange="on_batch_select"
         style="width: 100%;">
         <el-table-column
           type="selection"
-          width="55">
+          width="55"
+          slot="selection">
         </el-table-column>
         <el-table-column
-          prop="id"
-          label="id"
-          sortable>
-        </el-table-column>
-        <el-table-column
-          prop="name"
-          label="分类名称"
-          sortable>
-        </el-table-column>
-        <el-table-column
-          label="操作">
+          label="操作"
+          slot="opt">
           <template scope="props">
               <el-button type="primary" size="small" icon="edit" @click="openType(props.row)">修改</el-button>
             <el-button type="danger" size="small" icon="delete" @click="delete_data(props.row)">删除</el-button>
           </template>
         </el-table-column>
-      </el-table>
+      </my-table>
       <bottom-tool-bar>
         <el-button
           type="danger"
@@ -80,11 +70,22 @@
 
 </template>
 <script type="text/javascript">
-  import {panelTitle, bottomToolBar} from '@/components'
+  import {panelTitle, bottomToolBar, myTable} from '@/components'
 
   export default{
     data () {
       return {
+        colConfigs: [{
+          slot: 'selection'
+        }, {
+          prop: 'id',
+          label: 'id'
+        }, {
+          prop: 'name',
+          label: '分类名称'
+        }, {
+          slot: 'opt'
+        }],
         type: [],
         // 当前页码
         currentPage: 1,
@@ -109,7 +110,8 @@
     },
     components: {
       panelTitle,
-      bottomToolBar
+      bottomToolBar,
+      myTable
     },
     created () {
       this.get_table_data()

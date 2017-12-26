@@ -9,44 +9,36 @@
       </router-link>
     </panel-title>
     <div class="panel-body">
-      <el-table
+      <my-table
         :data="photo"
-        v-loading="load_data"
-        element-loading-text="拼命加载中"
-        border
-        @selection-change="on_batch_select"
+        :col-configs="colConfigs"
+        :loading="load_data"
+        @selectionChange="on_batch_select"
         style="width: 100%;">
         <el-table-column
           type="selection"
-          width="55">
+          width="55"
+          slot="selection">
         </el-table-column>
         <el-table-column
-          prop="id"
-          label="id"
-          width="80"
-          sortable>
-        </el-table-column>
-        <el-table-column
-          prop="name"
-          label="相册标题"
-          sortable>
-        </el-table-column>
-        <el-table-column
-          label="相册图片">
+          label="相册图片"
+          slot="img">
            <template scope="props">
            <img :src="props.row.img[0].src"/>
           </template>
         </el-table-column>
         <el-table-column
           label="图片数量"
-          sortable>
+          sortable
+          slot="sum">
           <template scope="props">
            <p>{{props.row.img.length}}</p>
           </template>
         </el-table-column>
         <el-table-column
           label="操作"
-          width="170">
+          width="170"
+          slot="opt">
           <template scope="props">
             <router-link :to="{name: 'photoEdit', params: {id: props.row.id}}" tag="span">
               <el-button type="primary" size="small" icon="edit">修改</el-button>
@@ -54,7 +46,7 @@
             <el-button type="danger" size="small" icon="delete" @click="delete_data(props.row)">删除</el-button>
           </template>
         </el-table-column>
-      </el-table>
+      </my-table>
       <bottom-tool-bar>
         <el-button
           type="danger"
@@ -81,11 +73,26 @@
   </div>
 </template>
 <script type="text/javascript">
-  import {panelTitle, bottomToolBar} from '@/components'
+  import {panelTitle, bottomToolBar, myTable} from '@/components'
 
   export default{
     data () {
       return {
+        colConfigs: [{
+          slot: 'selection'
+        }, {
+          prop: 'id',
+          label: 'id'
+        }, {
+          prop: 'name',
+          label: '相册标题'
+        }, {
+          slot: 'img'
+        }, {
+          slot: 'sum'
+        }, {
+          slot: 'opt'
+        }],
         photo: null,
         // 当前页码
         currentPage: 1,
@@ -103,7 +110,8 @@
     },
     components: {
       panelTitle,
-      bottomToolBar
+      bottomToolBar,
+      myTable
     },
     mounted () {
       this.get_table_data()
